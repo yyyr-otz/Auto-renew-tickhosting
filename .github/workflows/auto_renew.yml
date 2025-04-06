@@ -26,18 +26,17 @@ jobs:
         git pull --rebase origin main
       
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5.5.0
       with:
         python-version: '3.x'
-        
-    - name: Install Chrome
-      uses: browser-actions/setup-chrome@latest
-      
-    - name: Install Python dependencies
-      run: |
+        cache: 'pip'
+    - run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+
     - name: Run auto renew script
       env:
         EMAIL: ${{ secrets.EMAIL }}
